@@ -8,13 +8,14 @@
 
 .login-card {
   width: 100%;
-  max-width: 450px;
+  max-width: 420px;
   padding: var(--space-8);
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
-  border-color: rgba(34, 197, 94, 0.15);
-  box-shadow: var(--shadow-glow-primary);
+  background: #000000;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
 }
 
 .login-tabs {
@@ -28,19 +29,21 @@
   padding: var(--space-2) 0;
   text-align: center;
   font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: var(--text-sm);
+  font-weight: 800;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--color-text-secondary);
   border-bottom: 2px solid transparent;
   transition: all var(--transition-fast);
 }
 
 .login-tab:hover {
-  color: var(--color-text);
+  color: #ffffff;
 }
 
 .login-tab--active {
-  color: var(--color-primary-light);
+  color: #ffffff;
   border-bottom-color: var(--color-primary);
 }
 
@@ -53,42 +56,48 @@
 }
 
 .login-logo {
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-bottom: var(--space-2);
-  filter: drop-shadow(0 0 10px var(--color-primary-glow));
 }
 
 .login-title {
-  font-size: var(--text-2xl);
-  font-weight: 700;
+  font-size: var(--text-xl);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: #fff;
   font-family: var(--font-heading);
 }
 
 .login-subtitle {
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--color-text-secondary);
 }
 
 /* Status message bubbles */
 .login-message {
   padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-md);
-  font-size: var(--text-sm);
-  font-weight: 500;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  border: 1px solid transparent;
   animation: fadeIn 0.3s ease-out;
 }
 
 .login-message--success {
-  background: rgba(34, 197, 94, 0.1);
+  background: rgba(0, 255, 102, 0.08);
   color: var(--color-success);
-  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-color: rgba(0, 255, 102, 0.2);
 }
 
 .login-message--error {
-  background: rgba(239, 68, 68, 0.1);
+  background: rgba(239, 68, 68, 0.08);
   color: var(--color-danger);
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.2);
 }
 
 .login-form {
