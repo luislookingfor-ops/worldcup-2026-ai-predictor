@@ -9,41 +9,25 @@
   padding: var(--space-5);
   text-decoration: none;
   color: var(--color-text);
-  position: relative;
-  overflow: hidden;
+  background: #000000;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
   cursor: pointer;
-}
-
-.match-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-primary), var(--color-secondary), transparent);
-  opacity: 0;
-  transition: opacity var(--transition-base);
-}
-
-.match-card:hover::before {
-  opacity: 1;
+  transition: all var(--transition-base);
 }
 
 .match-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg), var(--shadow-glow-primary);
+  border-color: var(--color-primary);
+  box-shadow: 
+    var(--shadow-md),
+    0 0 16px rgba(0, 82, 255, 0.15);
+  transform: translateY(-2px);
 }
 
 /* Live match pulsing border */
 .match-card--live {
-  border-color: hsla(0, 100%, 55%, 0.3);
-  animation: glow 3s infinite;
-}
-
-.match-card--live::before {
-  opacity: 1;
-  background: linear-gradient(90deg, transparent, var(--color-live), transparent);
+  border-color: var(--color-danger);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.2);
 }
 
 /* Header */
@@ -54,11 +38,11 @@
 }
 
 .match-group {
-  font-size: var(--text-xs);
+  font-size: 10px;
   color: var(--color-text-muted);
-  font-weight: 500;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
 }
 
 /* Teams Layout */
@@ -102,8 +86,10 @@
 }
 
 .team-name {
-  font-size: var(--text-sm);
-  font-weight: 600;
+  font-size: var(--text-xs);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
@@ -163,12 +149,16 @@
 }
 
 .match-date {
-  font-size: var(--text-xs);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--color-text-muted);
 }
 
 .match-venue {
-  font-size: var(--text-xs);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--color-text-muted);
   white-space: nowrap;
   overflow: hidden;
