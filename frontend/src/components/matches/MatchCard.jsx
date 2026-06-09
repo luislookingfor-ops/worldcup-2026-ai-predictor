@@ -15,7 +15,10 @@ function getStatusInfo(status) {
   return STATUS_MAP[status] || { label: status || 'Programado', class: 'scheduled' };
 }
 
-function getFlagUrl(team) {
+function getFlagUrl(team, matchCrest) {
+  if (team?.crest) return team.crest;
+  if (matchCrest) return matchCrest;
+  if (team?.flagUrl) return team.flagUrl;
   const code = team?.tla?.substring(0, 2)?.toLowerCase()
     || team?.code?.toLowerCase()
     || team?.iso2?.toLowerCase()
@@ -69,9 +72,9 @@ export default function MatchCard({ match }) {
         {/* Home Team */}
         <div className="match-team">
           <div className="team-flag-wrapper">
-            {getFlagUrl(home) ? (
+            {getFlagUrl(home, match.home_team_crest || match.homeTeam?.crest) ? (
               <img
-                src={getFlagUrl(home)}
+                src={getFlagUrl(home, match.home_team_crest || match.homeTeam?.crest)}
                 alt={`Bandera de ${home.name || 'Local'}`}
                 className="team-flag"
                 loading="lazy"
@@ -99,9 +102,9 @@ export default function MatchCard({ match }) {
         {/* Away Team */}
         <div className="match-team">
           <div className="team-flag-wrapper">
-            {getFlagUrl(away) ? (
+            {getFlagUrl(away, match.away_team_crest || match.awayTeam?.crest) ? (
               <img
-                src={getFlagUrl(away)}
+                src={getFlagUrl(away, match.away_team_crest || match.awayTeam?.crest)}
                 alt={`Bandera de ${away.name || 'Visitante'}`}
                 className="team-flag"
                 loading="lazy"

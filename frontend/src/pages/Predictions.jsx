@@ -4,7 +4,10 @@ import { useAuth } from '../context/AuthContext';
 import Loading from '../components/common/Loading';
 import Button from '../components/common/Button';
 
-function getFlagUrl(team) {
+function getFlagUrl(team, matchCrest) {
+  if (team?.crest) return team.crest;
+  if (matchCrest) return matchCrest;
+  if (team?.flagUrl) return team.flagUrl;
   const code = team?.tla?.substring(0, 2)?.toLowerCase()
     || team?.code?.toLowerCase()
     || team?.iso2?.toLowerCase()
@@ -126,14 +129,14 @@ export default function Predictions() {
                     {/* Home Team */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', flex: 1, justifyContent: 'flex-end' }}>
                       <span style={{ fontWeight: 600, fontSize: 'var(--text-sm)' }}>{home.name}</span>
-                      {getFlagUrl(home) && <img src={getFlagUrl(home)} alt={home.name} style={{ width: '24px', height: '16px', borderRadius: '2px' }} />}
+                      {getFlagUrl(home, match.home_team_crest) && <img src={getFlagUrl(home, match.home_team_crest)} alt={home.name} style={{ width: '24px', height: '16px', borderRadius: '2px', objectFit: 'contain' }} />}
                     </div>
 
                     <span style={{ fontWeight: 800, color: 'var(--color-text-muted)', fontSize: 'var(--text-xs)' }}>VS</span>
 
                     {/* Away Team */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', flex: 1 }}>
-                      {getFlagUrl(away) && <img src={getFlagUrl(away)} alt={away.name} style={{ width: '24px', height: '16px', borderRadius: '2px' }} />}
+                      {getFlagUrl(away, match.away_team_crest) && <img src={getFlagUrl(away, match.away_team_crest)} alt={away.name} style={{ width: '24px', height: '16px', borderRadius: '2px', objectFit: 'contain' }} />}
                       <span style={{ fontWeight: 600, fontSize: 'var(--text-sm)' }}>{away.name}</span>
                     </div>
                   </div>

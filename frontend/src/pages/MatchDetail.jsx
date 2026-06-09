@@ -8,7 +8,10 @@ import Loading from '../components/common/Loading';
 import Button from '../components/common/Button';
 import './MatchDetail.css';
 
-function getFlagUrl(team) {
+function getFlagUrl(team, matchCrest) {
+  if (team?.crest) return team.crest;
+  if (matchCrest) return matchCrest;
+  if (team?.flagUrl) return team.flagUrl;
   const code = team?.tla?.substring(0, 2)?.toLowerCase()
     || team?.code?.toLowerCase()
     || team?.iso2?.toLowerCase()
@@ -121,8 +124,8 @@ export default function MatchDetail() {
           {/* Home Team */}
           <div className="scoreboard-team">
             <div className="scoreboard-flag-wrapper">
-              {getFlagUrl(home) ? (
-                <img src={getFlagUrl(home)} alt={home.name} className="scoreboard-flag" />
+              {getFlagUrl(home, match.home_team_crest || match.homeTeam?.crest) ? (
+                <img src={getFlagUrl(home, match.home_team_crest || match.homeTeam?.crest)} alt={home.name} className="scoreboard-flag" />
               ) : (
                 <span className="scoreboard-flag-placeholder">🏳️</span>
               )}
@@ -149,8 +152,8 @@ export default function MatchDetail() {
           {/* Away Team */}
           <div className="scoreboard-team">
             <div className="scoreboard-flag-wrapper">
-              {getFlagUrl(away) ? (
-                <img src={getFlagUrl(away)} alt={away.name} className="scoreboard-flag" />
+              {getFlagUrl(away, match.away_team_crest || match.awayTeam?.crest) ? (
+                <img src={getFlagUrl(away, match.away_team_crest || match.awayTeam?.crest)} alt={away.name} className="scoreboard-flag" />
               ) : (
                 <span className="scoreboard-flag-placeholder">🏳️</span>
               )}

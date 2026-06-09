@@ -155,6 +155,25 @@ body::before {
   z-index: 0;
 }
 
+/* Dynamic ambient spotlight following cursor */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    hsla(145, 80%, 45%, 0.04) 0%,
+    hsla(210, 100%, 55%, 0.04) 30%,
+    hsla(45, 100%, 55%, 0.02) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
 ::selection {
   background-color: hsla(145, 80%, 45%, 0.3);
   color: var(--color-text);
@@ -262,14 +281,17 @@ h4 { font-size: var(--text-xl); }
   -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
-  transition: all var(--transition-base);
+  transition: all var(--transition-spring);
 }
 
 .glass-card:hover {
-  background: var(--glass-bg-hover);
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: var(--shadow-glow-primary);
-  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: hsla(145, 80%, 45%, 0.35);
+  box-shadow: 
+    0 12px 40px -10px rgba(0, 0, 0, 0.6),
+    0 0 20px hsla(145, 80%, 45%, 0.1),
+    0 0 40px hsla(210, 100%, 55%, 0.05);
+  transform: translateY(-4px) scale(1.01);
 }
 
 /* ---------- Gradient Text ---------- */
