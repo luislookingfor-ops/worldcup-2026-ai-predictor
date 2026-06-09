@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "https://your-render-backend.onrender.com/api/$1" },
+    { "source": "/api/(.*)", "destination": "https://worldcup2026-ai-predictor-api.onrender.com/api/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
