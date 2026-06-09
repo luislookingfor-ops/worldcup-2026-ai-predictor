@@ -1,0 +1,71 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    name: Lint & Build Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-cache: 'npm'
+
+      # ----- Backend Validation -----
+      - name: Install Backend Dependencies
+        working-directory: ./backend
+        run: npm ci
+
+      # ----- Frontend Validation -----
+      - name: Install Frontend Dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      - name: Build Frontend (Verify compiling)
+        working-directory: ./frontend
+        env:
+          VITE_API_URL: https://worldcup2026-ai-predictor-api.onrender.com/api
+          VITE_SUPABASE_URL: https://vnssmbjbxhwwbokkqluc.supabase.co
+          VITE_SUPABASE_ANON_KEY: sb_publishable_yO1QVTLYXLFGk3cdES5vDw_v-PoArCv
+        run: npm run build
+
+  deploy:
+    name: Production Deployment
+    needs: validate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # ----- Deploy Backend to Render -----
+      - name: Trigger Render Deploy Hook
+        if: env.RENDER_DEPLOY_HOOK != ''
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: |
+          echo "🚀 Triggering backend redeployment on Render..."
+          curl -s -X POST "$RENDER_DEPLOY_HOOK"
+
+      # ----- Deploy Frontend to Vercel -----
+      - name: Deploy to Vercel
+        if: env.VERCEL_TOKEN != ''
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+          working-directory: ./frontend
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
