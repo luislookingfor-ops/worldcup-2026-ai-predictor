@@ -122,28 +122,46 @@ ALTER TABLE ai_predictions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE agent_conversations ENABLE ROW LEVEL SECURITY;
 
 -- Public read for teams, matches, ai_predictions, profiles
+DROP POLICY IF EXISTS "teams_public_read" ON teams;
 CREATE POLICY "teams_public_read" ON teams FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "matches_public_read" ON matches;
 CREATE POLICY "matches_public_read" ON matches FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "ai_predictions_public_read" ON ai_predictions;
 CREATE POLICY "ai_predictions_public_read" ON ai_predictions FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "profiles_public_read" ON profiles;
 CREATE POLICY "profiles_public_read" ON profiles FOR SELECT USING (true);
 
 -- Users manage own profile
+DROP POLICY IF EXISTS "profiles_own_update" ON profiles;
 CREATE POLICY "profiles_own_update" ON profiles 
   FOR UPDATE USING ((SELECT auth.uid()) = id);
+
+DROP POLICY IF EXISTS "profiles_own_insert" ON profiles;
 CREATE POLICY "profiles_own_insert" ON profiles 
   FOR INSERT WITH CHECK ((SELECT auth.uid()) = id);
 
 -- Users manage own predictions
+DROP POLICY IF EXISTS "predictions_own_select" ON predictions;
 CREATE POLICY "predictions_own_select" ON predictions 
   FOR SELECT USING ((SELECT auth.uid()) = user_id);
+
+DROP POLICY IF EXISTS "predictions_own_insert" ON predictions;
 CREATE POLICY "predictions_own_insert" ON predictions 
   FOR INSERT WITH CHECK ((SELECT auth.uid()) = user_id);
+
+DROP POLICY IF EXISTS "predictions_own_update" ON predictions;
 CREATE POLICY "predictions_own_update" ON predictions 
   FOR UPDATE USING ((SELECT auth.uid()) = user_id);
 
 -- Users manage own agent logs
+DROP POLICY IF EXISTS "agent_conv_own_select" ON agent_conversations;
 CREATE POLICY "agent_conv_own_select" ON agent_conversations 
   FOR SELECT USING ((SELECT auth.uid()) = user_id);
+
+DROP POLICY IF EXISTS "agent_conv_own_insert" ON agent_conversations;
 CREATE POLICY "agent_conv_own_insert" ON agent_conversations 
   FOR INSERT WITH CHECK ((SELECT auth.uid()) = user_id);
 
@@ -202,10 +220,12 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS predictions_updated_at ON predictions;
 CREATE TRIGGER predictions_updated_at
   BEFORE UPDATE ON predictions
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
 
+DROP TRIGGER IF EXISTS profiles_updated_at ON profiles;
 CREATE TRIGGER profiles_updated_at
   BEFORE UPDATE ON profiles
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
