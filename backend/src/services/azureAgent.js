@@ -99,12 +99,11 @@ class AzureAgentService {
    * @returns {Promise<{ threadId: string, response: string, role: string }>}
    */
   async chat(userMessage, threadId = null) {
-    // If the configuration is a placeholder or not set, use the offline fallback agent
-    if (
-      this._isPlaceholder(this.connectionString) ||
-      this._isPlaceholder(this.apiKey) ||
-      this._isPlaceholder(this.endpoint)
-    ) {
+    const hasConnectionStr = !this._isPlaceholder(this.connectionString);
+    const hasEndpointAndKey = !this._isPlaceholder(this.apiKey) && !this._isPlaceholder(this.endpoint) && !this._isPlaceholder(this.agentId);
+
+    // If neither configuration is set, use the offline fallback agent
+    if (!hasConnectionStr && !hasEndpointAndKey) {
       console.log('🤖 Using local simulated Copa26 AI Expert (Azure credentials not configured).');
       return this._chatSimulated(userMessage, threadId);
     }
