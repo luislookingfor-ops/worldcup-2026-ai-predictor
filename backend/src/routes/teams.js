@@ -32,9 +32,10 @@ router.get('/', async (req, res, next) => {
       const { data, error } = await query;
 
       if (!error && data && data.length > 0) {
+        const mappedData = data.map((t) => ({ id: t.external_id, ...t }));
         return res.json({
           success: true,
-          data,
+          data: mappedData,
           count: data.length,
           source: 'database',
         });
@@ -79,7 +80,8 @@ router.get('/:id', async (req, res, next) => {
       .single();
 
     if (!error && dbTeam) {
-      return res.json({ success: true, data: dbTeam, source: 'database' });
+      const mappedTeam = { id: dbTeam.external_id, ...dbTeam };
+      return res.json({ success: true, data: mappedTeam, source: 'database' });
     }
 
     // Fall back to API – fetch all teams and filter

@@ -167,6 +167,69 @@ class AzureAgentService {
       };
 
       response = `\`\`\`json\n${JSON.stringify(mockJson, null, 2)}\n\`\`\``;
+    } else if (msg.includes('méxico') || msg.includes('mexico')) {
+      response = `🇲🇽 **Análisis de Copa26 AI — Selección de México:**
+
+México llega con una enorme responsabilidad y una ilusión renovada al ser uno de los co-organizadores del certamen. 
+* **Fortalezas:** El Estadio Azteca jugará un rol psicológico fundamental en el debut. La presión de la afición local y la velocidad por las bandas son sus armas más peligrosas.
+* **Debilidades:** La inconsistencia defensiva y la presión mediática suelen ser sus mayores obstáculos en rondas eliminatorias directas.
+* **Pronóstico de IA:** Se proyecta que México supere la fase de grupos con solvencia. Su cruce en dieciseisavos de final exigirá la máxima concentración táctica si desea romper su límite histórico de cuartos.`;
+    } else if (msg.includes('argentina')) {
+      response = `🇦🇷 **Análisis de Copa26 AI — Selección de Argentina:**
+
+Los vigentes defensores del título llegan en una etapa de madurez y consolidación táctica excepcional.
+* **Fortalezas:** La mentalidad ganadora, la jerarquía de su mediocampo y la química grupal construida desde 2022. La inteligencia táctica para manejar ritmos de juego es la mejor del torneo.
+* **Debilidades:** La transición generacional en algunas posiciones defensivas clave y la altísima presión por revalidar la corona.
+* **Pronóstico de IA:** Favorito indiscutible (14.2% de probabilidad de campeonar). Su modelo estadístico proyecta su llegada como mínimo a las semifinales.`;
+    } else if (msg.includes('ecuador')) {
+      response = `🇪🇨 **Análisis de Copa26 AI — Selección de Ecuador:**
+
+Ecuador cuenta actualmente con una de las generaciones de futbolistas más potentes e interesantes de su historia.
+* **Fortalezas:** La potencia física en transiciones rápidas de defensa-ataque, un bloque defensivo sumamente sólido y jóvenes figuras consolidadas en ligas top de Europa.
+* **Debilidades:** La falta de efectividad y contundencia de cara al arco en partidos cerrados contra potencias mundiales.
+* **Pronóstico de IA:** Clasificado de cuidado. La IA proyecta a Ecuador como la potencial "sorpresa de CONMEBOL", con alta probabilidad de alcanzar los cuartos de final si mantiene su solidez defensiva.`;
+    } else if (msg.includes('colombia')) {
+      response = `🇨🇴 **Análisis de Copa26 AI — Selección de Colombia:**
+
+La selección cafetera ha recuperado su brillo y solidez táctica con una propuesta ofensiva muy vistosa y de gran posesión.
+* **Fortalezas:** Creatividad en el mediocampo, gran volumen de juego por los extremos y una excelente racha de partidos invicto en la fase previa.
+* **Debilidades:** Concentración en momentos críticos de contragolpe y la dependencia de individualidades en momentos de bloqueo colectivo.
+* **Pronóstico de IA:** Se proyecta como un candidato sólido de segunda línea para llegar a cuartos o semifinales. Su rendimiento táctico colectivo los hace muy difíciles de batir.`;
+    } else if (msg.includes('brasil') || msg.includes('brazil')) {
+      response = `🇧🇷 **Análisis de Copa26 AI — Selección de Brasil:**
+
+La "Canarinha" llega siempre con la chapa de candidato histórico y un arsenal inagotable de talento individual.
+* **Fortalezas:** Habilidad en el uno contra uno, desequilibrio ofensivo extremo y un plantel repleto de delanteros veloces y creativos.
+* **Debilidades:** Desbalances tácticos en el retroceso defensivo y la enorme impaciencia de su afición si los resultados no son abultados de inmediato.
+* **Pronóstico de IA:** Tercer favorito general (12.5% de probabilidad). Estadísticamente dominante en la creación de ocasiones de gol.`;
+    } else if (msg.includes('españa') || msg.includes('espana') || msg.includes('spain')) {
+      response = `🇪🇸 **Análisis de Copa26 AI — Selección de España:**
+
+España mantiene su identidad basada en la posesión de balón, combinada ahora con transiciones rápidas gracias a extremos jóvenes muy verticales.
+* **Fortalezas:** Control total del ritmo del partido en el mediocampo y dinamismo ofensivo.
+* **Debilidades:** Vulnerabilidad ante defensas extremadamente cerradas y contragolpes directos rápidos.
+* **Pronóstico de IA:** Cuarto favorito del torneo (11.8%). Su volumen de posesión promedio proyectado es de 63.5%.`;
+    } else if (msg.includes('usa') || msg.includes('estados unidos') || msg.includes('eeuu')) {
+      response = `🇺🇸 **Análisis de Copa26 AI — Selección de Estados Unidos:**
+
+El equipo estadounidense llega en el momento cumbre del desarrollo de su generación dorada, jugando en su propio territorio.
+* **Fortalezas:** Dinamismo físico, rapidez por las bandas y una plantilla con roce en ligas top de Europa.
+* **Debilidades:** La falta de un centro delantero de jerarquía mundial consolidado y la presión del público local.
+* **Pronóstico de IA:** Candidato a avanzar con fuerza en las llaves eliminatorias. El modelo le da una alta probabilidad de llegar a cuartos de final.`;
+    } else if (msg.includes('francia') || msg.includes('france')) {
+      response = `🇫🇷 **Análisis de Copa26 AI — Selección de Francia:**
+
+Francia presenta uno de los planteles más completos, equilibrados y físicamente temibles de todo el planeta fútbol.
+* **Fortalezas:** Pegada letal con Kylian Mbappé y una velocidad de contraataque devastadora, sumada a una zaga defensiva de primer nivel.
+* **Debilidades:** Fricciones internas bajo presión extrema o exceso de confianza ante rivales de menor jerarquía.
+* **Pronóstico de IA:** Segundo gran favorito general (13.8% de probabilidad). Candidato natural a disputar la final.`;
+    } else if (msg.includes('uruguay')) {
+      response = `🇺🇾 **Análisis de Copa26 AI — Selección de Uruguay:**
+
+La "Celeste" llega bajo una filosofía de presión alta, intensidad máxima y transiciones verticales vertiginosas.
+* **Fortalezas:** Presión incesante sobre la salida del rival, excelente juego aéreo y potencia física descomunal en ataque.
+* **Debilidades:** Desgaste físico prematuro en torneos cortos de alta exigencia de viajes.
+* **Pronóstico de IA:** Rivales sumamente incómodos. Clasificado con alta probabilidad para disputar las semifinales debido a su consistencia competitiva.`;
     } else if (msg.includes('favorito') || msg.includes('ganar') || msg.includes('campeon') || msg.includes('campeón')) {
       response = `🏆 **Favoritos para ganar el Mundial 2026:**
       
@@ -209,7 +272,7 @@ Basándome en la información histórica y el rendimiento táctico actual:
 * Las selecciones de la **UEFA** (como Francia, España e Inglaterra) y **CONMEBOL** (Argentina y Brasil) siguen liderando las métricas de proyección de goles.
 * Equipos revelación de la **CAF** (como Marruecos) e **IP** (como Japón) se perfilan para dar sorpresas en la fase de grupos.
 
-Para darte un análisis más preciso, puedes preguntarme sobre alguna selección específica (ej. *"¿Cómo llega México?"*) o sobre el partido inaugural del mundial.`;
+Para darte un análisis más preciso, puedes preguntarme sobre alguna selección específica (ej. *"¿Cómo llega México?"*, *"¿Qué tal Ecuador?"*) o sobre el partido inaugural del mundial.`;
     }
 
     return {

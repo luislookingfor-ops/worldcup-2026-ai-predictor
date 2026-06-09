@@ -54,7 +54,7 @@ router.post('/', requireAuth, async (req, res, next) => {
     // Check if match exists and is still SCHEDULED / TIMED
     const { data: match } = await supabaseAdmin
       .from('matches')
-      .select('id, status, external_id, home_team_name, away_team_name, utc_date')
+      .select('status, external_id, home_team_name, away_team_name, utc_date')
       .eq('external_id', Number(matchId))
       .single();
 
@@ -137,22 +137,36 @@ router.get('/my', requireAuth, async (req, res, next) => {
       });
     }
 
+    // Map matches to include id
+    const mappedData = (data || []).map((p) => {
+      if (p.matches) {
+        return {
+          ...p,
+          matches: {
+            id: p.matches.external_id,
+            ...p.matches,
+          },
+        };
+      }
+      return p;
+    });
+
     // Calculate summary stats
-    const totalPoints = (data || []).reduce(
+    const totalPoints = mappedData.reduce(
       (sum, p) => sum + (p.points_earned || 0),
       0
     );
-    const scored = (data || []).filter(
+    const scored = mappedData.filter(
       (p) => p.points_earned !== null && p.points_earned !== undefined
     );
 
     return res.json({
       success: true,
-      data: data || [],
+      data: mappedData,
       summary: {
-        total: (data || []).length,
+        total: mappedData.length,
         scored: scored.length,
-        pending: (data || []).length - scored.length,
+        pending: mappedData.length - scored.length,
         totalPoints,
       },
     });

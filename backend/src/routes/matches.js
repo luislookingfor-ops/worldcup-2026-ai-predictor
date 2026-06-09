@@ -48,7 +48,8 @@ router.get('/', async (req, res, next) => {
       const { data, error } = await query;
 
       if (!error && data && data.length > 0) {
-        return res.json({ success: true, data, source: 'database' });
+        const mappedData = data.map((m) => ({ id: m.external_id, ...m }));
+        return res.json({ success: true, data: mappedData, source: 'database' });
       }
     }
 
@@ -89,7 +90,8 @@ router.get('/:id', async (req, res, next) => {
       .single();
 
     if (!error && dbMatch) {
-      return res.json({ success: true, data: dbMatch, source: 'database' });
+      const mappedMatch = { id: dbMatch.external_id, ...dbMatch };
+      return res.json({ success: true, data: mappedMatch, source: 'database' });
     }
 
     // Fall back to API
