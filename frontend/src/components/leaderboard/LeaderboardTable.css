@@ -1,0 +1,203 @@
+.leaderboard-table-wrapper {
+  overflow-x: auto;
+  border-color: rgba(255, 215, 0, 0.15); /* Gold hue for trophy page */
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  min-width: 600px;
+}
+
+.leaderboard-table th {
+  padding: var(--space-4) var(--space-6);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.leaderboard-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  transition: all var(--transition-fast);
+}
+
+.leaderboard-row:hover {
+  background: var(--glass-bg-hover);
+}
+
+.leaderboard-row--current {
+  background: rgba(34, 197, 94, 0.05);
+  border-color: rgba(34, 197, 94, 0.2);
+}
+
+.leaderboard-row--current:hover {
+  background: rgba(34, 197, 94, 0.08);
+}
+
+.leaderboard-table td {
+  padding: var(--space-4) var(--space-6);
+  vertical-align: middle;
+}
+
+/* Columns */
+.col-rank {
+  width: 80px;
+}
+
+.col-user {
+  width: auto;
+}
+
+.col-predictions {
+  width: 120px;
+  text-align: center;
+}
+
+.col-accuracy {
+  width: 160px;
+}
+
+.col-points {
+  width: 120px;
+  text-align: right;
+}
+
+/* Rank container */
+.rank-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-base);
+}
+
+.trophy {
+  font-size: var(--text-2xl);
+  filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.2));
+}
+
+.rank-number {
+  color: var(--color-text-secondary);
+}
+
+/* User Profile cell */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.user-avatar-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.user-avatar-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-avatar-placeholder {
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-primary-light);
+}
+
+.user-names {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-display-name {
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.self-tag {
+  font-size: 0.65rem;
+  padding: 1px var(--space-2);
+  background: var(--color-primary-glow);
+  color: var(--color-primary-light);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.user-username {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+/* Predictions count */
+.pred-count {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+/* Accuracy bar */
+.accuracy-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.accuracy-value {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.accuracy-mini-track {
+  width: 100%;
+  height: 4px;
+  background: var(--color-surface);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.accuracy-mini-fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+}
+
+/* Points */
+.points-value {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 800;
+  color: var(--color-accent);
+  text-shadow: 0 0 10px var(--color-accent-glow);
+}
+
+.leaderboard-row--current .points-value {
+  color: var(--color-primary-light);
+  text-shadow: 0 0 10px var(--color-primary-glow);
+}
+
+@media (max-width: 640px) {
+  .leaderboard-table th, 
+  .leaderboard-table td {
+    padding: var(--space-3) var(--space-4);
+  }
+}

@@ -1,0 +1,38 @@
+# render.yaml — Render Blueprint for World Cup 2026 AI Predictor Backend
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: worldcup2026-ai-predictor-api
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "10000"
+      - key: FRONTEND_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: FOOTBALL_DATA_API_KEY
+        sync: false
+      - key: AZURE_AI_PROJECT_CONNECTION_STRING
+        sync: false
+      - key: AZURE_AGENT_ID
+        sync: false
+      - key: AZURE_AI_ENDPOINT
+        sync: false
+      - key: AZURE_AI_API_KEY
+        sync: false
+      - key: ADMIN_SECRET
+        generateValue: true
+    healthCheckPath: /api/health
+    autoDeploy: true
